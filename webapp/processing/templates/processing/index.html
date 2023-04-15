@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bildverarbeitung</title>
+</head>
+
+<body>
+    <form method="post" action="{% url 'process_image' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label>Bild auswählen:</label>
+        <input type="file" name="image" multiple required><br><br>
+        <label>Model auswählen:</label>
+        <select name="model" required>
+            <option value="" disabled selected>wähle ein Modell</option>
+            {% for model in models %}
+            <option value="{{ model }}"><span>{{ model }}</span></option>
+            {% endfor %}
+        </select><br><br>
+        <button type="submit">Verarbeiten</button>
+    </form>
+</body>
+
+</html>

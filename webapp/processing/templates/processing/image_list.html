@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hochgeladene Bilder</title>
+</head>
+
+<body>
+    {% if images %}
+    <ul>
+        {% for image in images %}
+        <li>
+            {% load static %}
+            <img src="/media/{{image.filename}}" alt="{{ image.filename }}" width="1500">
+            <p>Dateiname: {{ image.filename }}</p>
+            <p>Größe: {{ image.width }} x {{ image.height }}</p>
+            <form method="POST" action="{% url 'delete_image' image.id %}">
+                {% csrf_token %}
+                <button type="submit">Löschen</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>Keine Bilder gefunden.</p>
+    {% endif %}
+</body>
+
+</html>
